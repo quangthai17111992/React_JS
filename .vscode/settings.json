@@ -1,0 +1,22 @@
+{
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "editor.formatOnSave": true,
+    "[javascript]": {
+        "editor.formatOnSave": true,
+        "editor.tabSize": 2,
+        "editor.detectIndentation": false,
+        "editor.insertSpaces": true
+    },
+    "[javascriptreact]": {
+        "editor.formatOnSave": true,
+        "editor.tabSize": 2,
+        "editor.detectIndentation": false,
+        "editor.insertSpaces": true
+    },
+    "[json]": {
+        "editor.tabSize": 2
+    },
+    // This one forces the tab to be **space**
+}
