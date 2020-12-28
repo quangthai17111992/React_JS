@@ -8,11 +8,15 @@ const propTypes = {
 	type: PropTypes.string,
 	classes: PropTypes.string,
 	shape: PropTypes.string, // none | small | medium | large
-	outline: PropTypes.bool
+	outline: PropTypes.bool,
+	htmlType: PropTypes.string,
+	onClick: PropTypes.func
 }
 
 const defaultProps = {
-	size: 'medium' // small | medium | large
+	size: 'medium', // small | medium | large
+	htmlType: 'button',
+	onClick: null
 }
 
 const PRIMARY_TYPE = 'primary'
@@ -20,12 +24,13 @@ const SUCCESS_TYPE = 'success'
 const SECONDARY_TYPE = 'secondary'
 const WARNING_TYPE = 'warning'
 const DANGER_TYPE = 'danger'
+const WHITE_TYPE = 'white'
 
 const Button = (props) => {
 	const buildBackgroundButton = (type) => {
 		switch (type) {
 			case PRIMARY_TYPE:
-				return 'bg-indigo-500 border-indigo-500 hover:bg-indigo-600 text-white'
+				return 'bg-blue-500 border-indigo-500 hover:bg-blue-600 text-white'
 			case SUCCESS_TYPE:
 				return 'bg-green-500 border-green-500 hover:bg-green-600 text-white'
 			case SECONDARY_TYPE:
@@ -34,8 +39,10 @@ const Button = (props) => {
 				return 'border-yellow-500 bg-yellow-500 hover:bg-yellow-600 text-white'
 			case DANGER_TYPE:
 				return 'border-gray-700 bg-gray-700 hover:bg-indigo-800 text-white'
+			case WHITE_TYPE:
+				return 'm-0 border-gray-400 bg-white hover:bg-white-800 text-gray'
 			default:
-				return 'bg-indigo-500 border-indigo-500 hover:bg-indigo-600 text-white'
+				return 'bg-blue-500 border-blue-500 hover:bg-blue-600 text-white'
 		}
 	}
 
@@ -51,8 +58,10 @@ const Button = (props) => {
 				return 'border-yellow-500 hover:bg-yellow-600 hover:text-white'
 			case DANGER_TYPE:
 				return 'border-gray-700 hover:bg-indigo-800 hover:text-white'
+			case WHITE_TYPE:
+				return 'm-0 bg-white hover:bg-white-800 text-gray'
 			default:
-				return 'bg-indigo-500 border-indigo-500 hover:bg-indigo-600 hover:text-white'
+				return 'bg-blue-500 border-blue-500 hover:bg-blue-600 hover:text-white'
 		}
 	}
 
@@ -63,11 +72,18 @@ const Button = (props) => {
 			classes && classes,
 			outline ? buildOutlineButton(type) : buildBackgroundButton(type)
 		)
-
 		return className
 	}
 
-	return <button className={buildClasses()}>{props.value}</button>
+	return (
+		<button
+			type={props.htmlType}
+			className={buildClasses()}
+			onClick={props.onClick}
+		>
+			{props.value}
+		</button>
+	)
 }
 
 Button.propTypes = propTypes

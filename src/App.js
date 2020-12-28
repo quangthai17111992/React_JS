@@ -1,17 +1,39 @@
 /* eslint-disable react/jsx-no-undef */
-import React from 'react'
+/* eslint-disable react/prop-types */
+import React, { useEffect } from 'react'
+import { BrowserRouter as Router, withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 
+import 'react-perfect-scrollbar/dist/css/styles.css'
 import './assets/styles/main.scss'
 
-import Button from './components/Button/Button'
-import Navbar from './components/Navbar/Navbar'
+import PublicRoute from './router'
+import { AuthService } from './services/auth.service'
+import { checkAuthStageChanged } from './store/actions/auth/Action'
+import { bindActionCreators } from 'redux'
 
-function App() {
+const RouteApp = withRouter(PublicRoute)
+
+function App(props) {
+	useEffect(() => {
+		AuthService.onAuthStateChanged((user) => {
+			props.checkAuthStageChanged(user)
+		})
+	}, [])
+
 	return (
-		<React.Fragment>
-			<Navbar />
-		</React.Fragment>
+		<Router>
+			<RouteApp isAuthenticated={props.isLoggedIn} />
+		</Router>
 	)
 }
 
-export default App
+const mapStateToProps = (state) => {
+	return { isLoggedIn: state.auth.isAuthenticated }
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return bindActionCreators({ checkAuthStageChanged }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

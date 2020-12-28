@@ -1,0 +1,81 @@
+.input[type=checkbox]:not(.input--switch) {
+    width: 16px;
+    height: 16px;
+    border-radius: 0.2em;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  
+  .input[type=checkbox]:not(.input--switch):before {
+    content: "";
+    transition: all 0.2s ease-in-out;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' class='feather feather-check'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+    background-size: 80%;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    --text-opacity: 1;
+    color: #fff;
+    color: rgba(255, 255, 255, var(--text-opacity));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  
+  .input[type=checkbox]:not(.input--switch):checked {
+    --bg-opacity: 1;
+    background-color: #3A8DF5;
+    background-color: rgba(58, 141, 245, var(--bg-opacity));
+    --border-opacity: 1;
+    border-color: #3A8DF5;
+    border-color: rgba(58, 141, 245, var(--border-opacity));
+  }
+  
+  .input[type=checkbox]:not(.input--switch):checked:before {
+    opacity: 1;
+  }
+  
+  .input.input--switch[type=checkbox] {
+    width: 38px;
+    height: 24px;
+    padding: 1px;
+    outline: 0;
+    border-radius: 9999px;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .input.input--switch[type=checkbox]:before {
+    content: "";
+    width: 22px;
+    height: 22px;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin-top: auto;
+    margin-bottom: auto;
+    border-radius: 9999px;
+  }
+  
+  .input.input--switch[type=checkbox]:checked {
+    --bg-opacity: 1;
+    background-color: #3A8DF5;
+    background-color: rgba(58, 141, 245, var(--bg-opacity));
+    --border-opacity: 1;
+    border-color: #3A8DF5;
+    border-color: rgba(58, 141, 245, var(--border-opacity));
+  }
+  
+  .input.input--switch[type=checkbox]:checked::before {
+    margin-left: 13px;
+    --bg-opacity: 1;
+    background-color: #fff;
+    background-color: rgba(255, 255, 255, var(--bg-opacity));
+  }
+  

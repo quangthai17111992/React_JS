@@ -1,11 +1,30 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
+import { withRouter } from 'react-router-dom'
+import { bindActionCreators } from 'redux'
 
 import Avatar from '../Avatar/Avatar'
+import { firebase } from '../../config/firebase'
+import { logout } from '../../store/actions/auth/Action'
+import { connect } from 'react-redux'
 
 export class UserDropdown extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = { visible: false }
+		this.handleLogout = this.handleLogout.bind(this)
+	}
+
+	handleLogout(event) {
+		event.preventDefault()
+
+		firebase
+			.auth()
+			.signOut()
+			.then(() => {
+				// eslint-disable-next-line react/prop-types
+				this.props.logout()
+			})
 	}
 
 	dropdownToggle(event) {
@@ -17,7 +36,7 @@ export class UserDropdown extends React.Component {
 		const { visible } = this.state
 
 		return visible ? (
-			<div className='dropdown-content dropdown-box absolute w-56 top-10 right-0 z-20 show'>
+			<div className='dropdown-content dropdown-box absolute w-56 top-12 right-0 z-20 show bg-white rounded-md'>
 				<div className='dropdown-box__content box'>
 					<div className='p-2'>
 						<a
@@ -108,6 +127,7 @@ export class UserDropdown extends React.Component {
 					</div>
 					<div className='dropdown-content__footer p-2 border-t'>
 						<a
+							onClick={this.handleLogout}
 							href='/test'
 							className='flex items-center block p-2 transition duration-300 ease-in-out rounded-md'
 						>
@@ -148,9 +168,9 @@ export class UserDropdown extends React.Component {
 					/>
 					<div className='hidden md:block ml-3'>
 						<div className='w-24 truncate font-medium leading-tight'>
-							Tom Cruise
+							{this.props.displayName}
 						</div>
-						<div className='account-dropdown__info uppercase'>
+						<div className='account-dropdown__info uppercase text-gray-400 text-xs'>
 							Frontend Engineer
 						</div>
 					</div>
@@ -161,4 +181,16 @@ export class UserDropdown extends React.Component {
 	}
 }
 
-export default UserDropdown
+const mapStateToProps = (state) => {
+	return {
+		displayName: state.auth.displayName
+	}
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return bindActionCreators({ logout }, dispatch)
+}
+
+export default withRouter(
+	connect(mapStateToProps, mapDispatchToProps)(UserDropdown)
+)

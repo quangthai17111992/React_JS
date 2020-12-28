@@ -1,0 +1,24 @@
+.tool-tip {
+    display: none;
+}
+
+.dropdown-toggle:hover .tool-tip {
+    display: block;
+}
+
+.icon-left-tool-tip::before{
+ content: "";
+ position: absolute;
+ left: -13px;
+ top: 50%;
+ margin-top: -5px;
+ width: 10px;
+ height: 10px;
+
+ border-style: solid;  
+    border-width: 8px 8px 0px 8px;
+    border-color: rgba(0, 0, 0, 0.8) transparent;
+    
+-webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
