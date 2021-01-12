@@ -3,9 +3,9 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 
-import Avatar from '../Avatar/Avatar'
-import { firebase } from '../../config/firebase'
-import { logout } from '../../store/actions/auth/Action'
+import Avatar from '../../core/components/Avatar/Avatar'
+import { firebase } from '../../core/config/firebase'
+import { logout } from '../../core/shared/store/actions/auth/Action'
 import { connect } from 'react-redux'
 
 export class UserDropdown extends React.Component {
@@ -168,7 +168,7 @@ export class UserDropdown extends React.Component {
 					/>
 					<div className='hidden md:block ml-3'>
 						<div className='w-24 truncate font-medium leading-tight'>
-							{this.props.displayName}
+							{this.props.currentUser.displayName}
 						</div>
 						<div className='account-dropdown__info uppercase text-gray-400 text-xs'>
 							Frontend Engineer
@@ -183,7 +183,7 @@ export class UserDropdown extends React.Component {
 
 const mapStateToProps = (state) => {
 	return {
-		displayName: state.auth.displayName
+		currentUser: state.auth.currentUser
 	}
 }
 

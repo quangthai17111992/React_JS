@@ -1,29 +1,41 @@
-/* eslint-disable react/jsx-no-undef */
-/* eslint-disable react/prop-types */
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BrowserRouter as Router, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 import 'react-perfect-scrollbar/dist/css/styles.css'
-import './assets/styles/main.scss'
+import 'src/assets/styles/main.scss'
+
+import { AuthService } from 'src/core/shared/services/auth.service'
+import { checkAuthStageChanged } from 'src/core/shared/store/actions/auth/Action'
 
 import PublicRoute from './router'
-import { AuthService } from './services/auth.service'
-import { checkAuthStageChanged } from './store/actions/auth/Action'
-import { bindActionCreators } from 'redux'
+
+import Spinner from './core/components/Spinner/Spinner'
 
 const RouteApp = withRouter(PublicRoute)
 
 function App(props) {
+	const [isLoading, setIsLoading] = useState(true)
+
+	// TODO: improve performace: because this function called 3 times
 	useEffect(() => {
 		AuthService.onAuthStateChanged((user) => {
-			props.checkAuthStageChanged(user)
+			if (user) {
+				props.checkAuthStageChanged(user)
+			}
+
+			setIsLoading(false)
 		})
-	}, [])
+	})
 
 	return (
 		<Router>
-			<RouteApp isAuthenticated={props.isLoggedIn} />
+			{isLoading ? (
+				<Spinner />
+			) : (
+				<RouteApp isAuthenticated={props.isLoggedIn} />
+			)}
 		</Router>
 	)
 }

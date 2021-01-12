@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Avatar from '../Avatar/Avatar'
+import Avatar from '../../core/components/Avatar/Avatar'
 
 const propTypes = {
 	id: PropTypes.string,
@@ -31,10 +31,10 @@ const ChatListItem = (props) => {
 				props && props.active ? 'bg-blue-400 text-white' : 'bg-white'
 			}`}
 		>
-			<div className='w-10 h-10 flex-none image-fit mr-1'>
-				<Avatar active={props.active} image={props.image} />
+			<div className='flex-none image-fit mr-1'>
+				<Avatar active={props.userOnline} image={props.image} />
 			</div>
-			<div className='ml-2 overflow-hidden'>
+			<div className='ml-2 overflow-hidden w-full'>
 				<a href='/test' className='chat-list__name font-medium'>
 					{props && props.title ? props.title : null}
 				</a>

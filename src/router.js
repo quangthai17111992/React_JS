@@ -1,11 +1,10 @@
 import React from 'react'
 import { Redirect, Route, Switch } from 'react-router-dom'
 
-import RegisterPage from './pages/RegisterPage/RegisterPage'
-import LoginPage from './pages/LoginPage/LoginPage'
 import ChatLayout from './layout/ChatLayout'
+import LoginPageComponent from './modules/login/components/page/page.component'
+import RegisterPageComponent from './modules/register/components/page/page.component'
 
-// eslint-disable-next-line react/prop-types
 const RestrictRoute = ({ component: Component, isAuthenticated }) => {
 	return (
 		<Route
@@ -24,19 +23,27 @@ const RestrictRoute = ({ component: Component, isAuthenticated }) => {
 	)
 }
 
-// eslint-disable-next-line react/prop-types
 const PublicRoute = ({ isAuthenticated }) => {
 	return (
 		<Switch>
 			<Route
+				exact
 				path='/register'
-				component={(props) => <RegisterPage {...props} />}
+				component={() => <RegisterPageComponent />}
 			/>
 			<Route
 				exact
 				path='/login'
-				render={() =>
-					isAuthenticated ? <Redirect to={{ path: '/' }} /> : <LoginPage />
+				component={() =>
+					isAuthenticated ? (
+						<Redirect
+							to={{
+								pathname: '/'
+							}}
+						/>
+					) : (
+						<LoginPageComponent />
+					)
 				}
 			/>
 			<RestrictRoute

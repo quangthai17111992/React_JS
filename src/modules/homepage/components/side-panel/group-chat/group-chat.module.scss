@@ -1,0 +1,19 @@
+.groupChat {
+	height: calc(100% - 250px);
+}
+
+.groupChatTabs {
+	overflow: hidden;
+	height: calc(100% - 32px);
+}
+
+.tabContainer {
+	.tabPanel {
+		display: none;
+		background-color: white;
+
+		&.active {
+			display: block;
+		}
+	}
+}

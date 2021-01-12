@@ -2,17 +2,20 @@ export const NavLink = [
 	{
 		label: 'Chat',
 		icon: 'chat',
-		url: '/'
+		url: '/',
+		isLink: true
 	},
 	{
 		label: 'Groups',
 		icon: 'groups',
-		url: '/groups'
+		url: '/#groups',
+		isLink: true
 	},
 	{
 		label: 'Contacts',
 		icon: 'contacts',
-		url: '/contacts'
+		url: '/#contacts',
+		isLink: true
 	},
 	{
 		label: 'Profile',
@@ -22,12 +25,14 @@ export const NavLink = [
 	{
 		label: 'Login',
 		icon: 'login',
-		url: '/login'
+		url: '/login',
+		isLink: true
 	},
 	{
 		label: 'Register',
 		icon: 'register',
-		url: '/register'
+		url: '/register',
+		isLink: true
 	},
 	{
 		label: 'Settings',

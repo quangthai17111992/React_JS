@@ -12,6 +12,7 @@ const SideMenu = () => {
 						label={item.label}
 						url={item.url}
 						key={item.label}
+						isLink={item.isLink}
 					/>
 			  ))
 			: null

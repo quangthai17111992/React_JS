@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import Button from '../Button/Button'
-import IconSvg from '../Icon/Icon'
+import Button from '../../core/components/Button/Button'
+import IconSvg from '../../core/components/Icon/Icon'
 import Logo from '../Logo/Logo'
 import UserDropdown from '../UserDropdown/UserDropdown'
 

@@ -5,8 +5,9 @@ import Navbar from '../components/Navbar/Navbar'
 import SideMenu from '../components/SideMenu/SideMenu'
 
 import Groups from '../pages/Groups/Groups'
-import HomePage from '../pages/HomePage/HomePage'
 import Contacts from '../pages/Contacts/Contacts'
+
+import HomePageComponent from '../modules/homepage/components/page/page.component'
 
 const ChatLayout = (props) => {
 	return (
@@ -26,7 +27,7 @@ const ChatLayout = (props) => {
 
 						{/** Home Page */}
 						<Route exact path='/'>
-							<HomePage />
+							<HomePageComponent />
 						</Route>
 					</Switch>
 				</div>

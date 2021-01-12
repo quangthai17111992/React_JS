@@ -3,8 +3,9 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
+import IconSvg from 'src/core/components/Icon/Icon'
+
 import './MenuItem.css'
-import IconSvg from '../../Icon/Icon'
 
 const propTypes = {
 	icon: PropTypes.any,
@@ -25,17 +26,37 @@ const MenuItem = (props) => {
 		return props && props.label ? props.label : null
 	}
 
-	return (
-		<Link
-			to={getUrl()}
-			className='notification-dropdown__toggler dropdown-toggle flex items-center py-5 relative -mr-3 md:mr-0 md:border-l md:border-r'
-		>
-			<IconSvg icon={getIcon()} className='mx-auto text-gray-400' />
-			<div className='icon-left-tool-tip tool-tip absolute left-20 bg-black text-white px-5 py-2 rounded-lg bg-opacity-80'>
-				{getLabel()}
+	const renderMenuItemContent = () => {
+		return (
+			<React.Fragment>
+				<IconSvg icon={getIcon()} className='mx-auto text-gray-400' />
+				<div className='icon-left-tool-tip tool-tip absolute left-20 bg-black text-white px-5 py-2 rounded-lg bg-opacity-80'>
+					{getLabel()}
+				</div>
+			</React.Fragment>
+		)
+	}
+
+	const renderLink = () => {
+		if (props.isLink) {
+			return (
+				<Link
+					to={getUrl()}
+					className='notification-dropdown__toggler dropdown-toggle flex items-center py-5 relative -mr-3 md:mr-0 md:border-l md:border-r'
+				>
+					{renderMenuItemContent()}
+				</Link>
+			)
+		}
+
+		return (
+			<div className='cursor-pointer notification-dropdown__toggler dropdown-toggle flex items-center py-5 relative -mr-3 md:mr-0 md:border-l md:border-r'>
+				{renderMenuItemContent()}
 			</div>
-		</Link>
-	)
+		)
+	}
+
+	return renderLink()
 }
 
 MenuItem.prototype = propTypes

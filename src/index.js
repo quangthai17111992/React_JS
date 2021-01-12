@@ -6,7 +6,7 @@ import './index.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 
-import { store } from './store/store'
+import { store } from './core/shared/store/store'
 
 ReactDOM.render(
 	<React.StrictMode>
